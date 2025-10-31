@@ -115,8 +115,8 @@ class WalletMessage extends IframeMessage {
 
   private async handleRetrieveAccount(id: string, payload: { ephemeralPublicKey: Hex }) {
     try {
-      // const proof = await getProof('http://localhost:3000', payload.ephemeralPublicKey);
-      const proof = await getProof('https://demo-auth.kzero.xyz', payload.ephemeralPublicKey);
+      const proof = await getProof('http://localhost:3000', payload.ephemeralPublicKey);
+      // const proof = await getProof('https://demo-auth.kzero.xyz', payload.ephemeralPublicKey);
 
       if (proof.status === 'failed') {
         this.sendError('accounts.retrieve', id, 'Failed to Login');
@@ -160,8 +160,8 @@ class WalletMessage extends IframeMessage {
   private async retrieveProof(ephemeralPublicKey: Hex) {
     while (true) {
       try {
-        // const proof = await getProof('http://localhost:3000', payload.ephemeralPublicKey);
-        const proof = await getProof('https://demo-auth.kzero.xyz', ephemeralPublicKey);
+        const proof = await getProof('http://localhost:3000', ephemeralPublicKey);
+        // const proof = await getProof('https://demo-auth.kzero.xyz', ephemeralPublicKey);
 
         if (proof.status === 'generated') {
           const account = getZkAccount(ephemeralPublicKey);

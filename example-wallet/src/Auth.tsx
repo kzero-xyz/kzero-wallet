@@ -9,7 +9,8 @@ function Auth() {
 
   useEffect(() => {
     if (provider && ephemeralPublicKey) {
-      fetch(`https://demo-auth.kzero.xyz/auth/${provider}?ephemeral_public_key=${ephemeralPublicKey}`, {
+      fetch(`http://localhost:3000/auth/${provider}?ephemeral_public_key=${ephemeralPublicKey}`, {
+      // fetch(`https://demo-auth.kzero.xyz/auth/${provider}?ephemeral_public_key=${ephemeralPublicKey}`, {
         credentials: 'include'
       })
         .then((res) => res.json())

@@ -63,5 +63,5 @@ export const defaultTheme = lightTheme;
 
 export const defaultProviders: LoginProvider[] = ['google', 'twitter'];
 
-export const walletIframeUrl = 'https://demo-wallet.kzero.xyz';
-// export const walletIframeUrl = 'http://localhost:5176';
+// export const walletIframeUrl = 'https://demo-wallet.kzero.xyz';
+export const walletIframeUrl = 'http://localhost:5176';
