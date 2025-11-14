@@ -25,6 +25,8 @@
       "import": "./vitest.config.base.js",
       "types": "./vitest.config.base.d.ts"
     },
+    "./eslint.js": "./eslint.js",
+    "./prettier.js": "./prettier.js",
     "./tsconfig.base.json": "./tsconfig.base.json"
   },
   "devDependencies": {
