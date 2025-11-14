@@ -16,6 +16,17 @@
   "type": "module",
   "name": "@kzero/dev",
   "version": "0.0.0",
+  "exports": {
+    "./vitest.config.base": {
+      "import": "./vitest.config.base.js",
+      "types": "./vitest.config.base.d.ts"
+    },
+    "./vitest.config.base.js": {
+      "import": "./vitest.config.base.js",
+      "types": "./vitest.config.base.d.ts"
+    },
+    "./tsconfig.base.json": "./tsconfig.base.json"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@vitest/ui": "^4.0.8",

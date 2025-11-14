@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig, mergeConfig } from 'vitest/config';
 
-import { vitestConfig } from '@kzero/dev/vitest.config.base';
+import { vitestConfig } from '@kzero/dev/vitest.config.base.js';
 
 export default mergeConfig(
   vitestConfig,
