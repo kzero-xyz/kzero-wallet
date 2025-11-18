@@ -51,7 +51,7 @@ function Authed({
     () =>
       new ApiPromise({
         initWasm: true,
-        provider: new WsProvider('ws://localhost:9944')
+        provider: new WsProvider(import.meta.env.VITE_RPC_URL || 'ws://127.0.0.1:9944')
       })
   );
   const [isReady, setIsReady] = useState(false);

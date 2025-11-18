@@ -1,56 +1,85 @@
-# Kzero Wallet
+# KZero Wallet SDK - Technical Documentation
 
-> A zero-knowledge proof based wallet system for Polkadot ecosystem, enabling OAuth-powered account management with enhanced privacy and security.
+## Overview
 
-## Features
+The KZero Wallet is a comprehensive zero-knowledge (ZK) wallet SDK that enables seamless integration of Web2 authentication and transaction constructing and signing capabilities into web3 applications. Built on top of Polkadot's ecosystem, it provides a secure, user-friendly interface for managing ZK accounts and signing blockchain transactions.
 
-- **Zero-Knowledge Authentication** - OAuth login (Google, Twitter, GitHub, etc.) without exposing JWT tokens
-- **Type-Safe Communication** - Fully typed iframe messaging using MessageChannel API
-- **React Integration** - Easy-to-use hooks and components for DApp integration
-- **Dynamic Theming** - Customizable UI with light/dark themes and brand colors
-- **Modular Architecture** - Framework-agnostic core with optional React bindings
-- **Security First** - PIN-encrypted key storage with XChaCha20-Poly1305 and PBKDF2
+The SDK leverages zero-knowledge proofs to enable users to authenticate using their social media accounts while maintaining privacy and security. This approach eliminates the need for traditional seed phrases while providing cryptographic security guarantees.
 
-## Project Structure
+![Figure 1:Package Structure](assets/kzero-wallet-packages.png)
 
-This is a **pnpm monorepo** managed by **Turbo**, containing NPM packages and applications:
+## Architecture
 
-```
-kzero-wallet/
-├── packages/              # NPM publishable SDK packages
-│   ├── zk-core/          # Core types and ZK proof utilities
-│   ├── message-port/     # Type-safe iframe communication library
-│   ├── zk-react/         # React integration (Provider, hooks, components)
-│   └── dev/              # Shared development configuration
-└── apps/                  # Applications
-    ├── wallet/           # Official wallet UI (runs as iframe)
-    └── playground/       # SDK integration example with theme customization
-```
+The SDK consists of three main packages working together to provide a complete wallet solution:
 
-### Dependency Graph
+### Package Structure
 
 ```
-┌─────────────────┐
-│  apps/wallet    │──── Authentication UI + Message handling
-└────────┬────────┘
-         │
-┌────────▼────────┐
-│ apps/playground │──── SDK integration demo
-└────────┬────────┘
-         │
-┌────────▼────────┐
-│  @kzero/        │
-│  zk-react       │──── React Provider + hooks + components
-└────────┬────────┘
-         │
-    ┌────┴────┬──────────────────┐
-    │         │                   │
-┌───▼────┐ ┌─▼──────────┐  ┌───▼──────┐
-│ zk-    │ │ message-   │  │ polkadot │
-│ core   │ │ port       │  │ libraries│
-└────────┘ └────────────┘  └──────────┘
+@kzero/zk-core     - Provides the foundational ZK proof generation, account management, and type definitions
+@kzero/zk-react    - Offers React-specific components, hooks, and theming system for UI integration
+@kzero/zk-wallet   - Handles message communication, cryptographic operations, and key management
 ```
-> To find more about the Project Arch, please refer to [KZero Wallet SDK - Technical Documentation](./docs/kzero-wallet-sdk.md)
+
+### External Dependencies
+- **Polkadot API**: For blockchain interaction and transaction signing
+- **Social Providers**: OAuth2/OpenID Connect integration with major platforms
+- **Cryptographic Libraries**: Ed25519, Blake2, NaCl for secure operations
+
+## Key Features
+
+### 1. Zero-Knowledge Authentication
+
+The SDK implements a sophisticated zero-knowledge authentication system that allows users to prove their identity without revealing sensitive information.
+
+![image](assets/workflow.png)
+
+#### Social Login Integration
+- **Supported Providers**: Google, Twitter, Apple, GitHub, etc.
+- **OAuth2/OpenID Connect**: Industry-standard authentication protocols
+- **Seamless Integration**: One-click login experience
+
+
+#### ZK Proof Generation
+- **Privacy-Preserving**: Users can authenticate without revealing personal data
+- **Cryptographic Security**: Mathematical guarantees of identity verification
+- **Automatic Generation**: Proofs are generated server-side and delivered securely
+
+#### Ephemeral Key Management
+- **Temporary Keypairs**: Generated locally for each session
+- **Secure Storage**: Encrypted storage with user-controlled passphrases
+- **Automatic Cleanup**: Keys are destroyed after session expiration
+
+### 2. Account Management
+
+Comprehensive account lifecycle management with real-time status tracking.
+
+#### Account Status Tracking
+- **Pending**: Initial authentication state
+- **Encrypting**: Key encryption in progress
+- **Ready**: Account fully operational
+
+#### Proof Status Management
+- **Pending**: ZK proof generation in progress
+- **Generated**: Proof successfully created
+- **Error**: Proof generation failed
+
+### 3. Transaction Signing
+
+Advanced transaction signing capabilities with Polkadot/Substrate integration.
+
+#### Polkadot Integration
+- **Full Compatibility**: Native support for Polkadot and Substrate networks
+- **Runtime Compatibility**: Automatic adaptation to different runtime versions
+- **Network Agnostic**: Works across multiple Polkadot parachains
+- **Encrypted Keys**: Uses encrypted ephemeral keys for signing
+
+## Installation & Setup
+
+### Prerequisites
+
+- **Node.js**: Version 20 or higher
+- **Package Manager**: pnpm (recommended) or npm
+- **Browser**: Modern browser with WebAssembly support
 ## Quick Start
 
 ### Prerequisites
@@ -128,6 +157,7 @@ function YourDApp() {
 
 See `apps/playground` for complete integration examples.
 
+
 ## Available Commands
 
 ### Build & Development
@@ -143,7 +173,7 @@ See `apps/playground` for complete integration examples.
 - `pnpm test:cov` - Generate coverage reports
 - `pnpm lint` - Run ESLint
 - `pnpm check-types` - Run TypeScript type checking
-> To find more details about the testing, please check [kzero-wallet-test-guide.md](./docs/kzero-wallet-test-guide.md)
+> To find more details about the testing, please check [kzero-wallet-test-guide.md](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/kzero-wallet-test-guide.md)
 ### Other
 - `pnpm commit` - Create conventional commit with Commitizen
 
@@ -290,22 +320,15 @@ pnpm --filter @kzero/zk-react check-types
 
 ## License
 
-[GPL-3.0](LICENSE)
+GPL-3.0
 
-## Links
+## Support
 
-### Project
+For technical support and questions:
 
-- **Repository**: [kzero-wallet](https://github.com/kzero-xyz/kzero-wallet)
-- **Issues**: [Report a bug or request a feature](https://github.com/kzero-xyz/kzero-wallet/issues)
+- **GitHub Issues**: [https://github.com/kzero-xyz/kzero-wallet/issues](https://github.com/kzero-xyz/kzero-wallet/issues)
+- **Github Repo**: [https://github.com/kzero-xyz/kzero-wallet](https://github.com/kzero-xyz/kzero-wallet)
 
-### Documentation
+---
 
-- **Kzero Wallet SDK - Technical Documentation**: [KZero Wallet SDK - Technical Documentation](./docs/kzero-wallet-sdk.md)
-- **Kzero Wallet Testing Guide**: [Testing Guide for Kzero Wallet SDK](./docs/kzero-wallet-test-guide.md)
-- **KZero Article**: [Kzero Overview](./docs/kzero-article.md)
-- **Docker Tutorial**: [Docker Tutorial: Running Kzero Full Stack Locally](./docs/kzero-docker-tutorial.md)
-
-### Related Services
-- **Kzero Service**: [Authentication Service](https://github.com/kzero-xyz/kzero-service/tree/feature/auth-server)
-- **Kzero Service Docker**: [Docker Setup](https://github.com/kzero-xyz/kzero-service-docker)
+*This technical documentation provides comprehensive coverage of the KZero Wallet SDK. For additional resources and advanced usage patterns, please refer to the individual package documentation and examples.*
