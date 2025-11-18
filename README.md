@@ -50,7 +50,7 @@ kzero-wallet/
 │ core   │ │ port       │  │ libraries│
 └────────┘ └────────────┘  └──────────┘
 ```
-
+> To find more about the Project Arch, please refer to [KZero Wallet SDK - Technical Documentation](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/kzero-wallet-sdk.md)
 ## Quick Start
 
 ### Prerequisites
@@ -143,7 +143,7 @@ See `apps/playground` for complete integration examples.
 - `pnpm test:cov` - Generate coverage reports
 - `pnpm lint` - Run ESLint
 - `pnpm check-types` - Run TypeScript type checking
-
+> To find more details about the testing, please check [kzero-wallet-test-guide.md](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/kzero-wallet-test-guide.md)
 ### Other
 - `pnpm commit` - Create conventional commit with Commitizen
 
@@ -294,5 +294,19 @@ pnpm --filter @kzero/zk-react check-types
 
 ## Links
 
-- **Repository**: https://github.com/kzero-xyz/kzero-wallet
-- **Issues**: https://github.com/kzero-xyz/kzero-wallet/issues
+### Project
+
+- **Repository**: [kzero-wallet](https://github.com/kzero-xyz/kzero-wallet)
+- **Issues**: [Report a bug or request a feature](https://github.com/kzero-xyz/kzero-wallet/issues)
+
+### Documentation
+
+- **Kzero Wallet SDK - Technical Documentation**: [KZero Wallet SDK - Technical Documentation
+](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/kzero-wallet-sdk.md)
+- **Kzero Wallet Testing Guide**: [Testing Guide for Kzero Wallet SDK](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/kzero-wallet-test-guide.md)
+- **KZero Article**: [Kzero Overview](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/kzero-article.md)
+- **Docker Tutorial**: [Docker Tutorial: Running Kzero Full Stack Locally](https://github.com/kzero-xyz/kzero-grant-docs/blob/main/m4-docker-tutorial.md)
+
+### Related Services
+- **Kzero Service**: [Authentication Service](https://github.com/kzero-xyz/kzero-service/tree/feature/auth-server)
+- **Kzero Service Docker**: [Docker Setup](https://github.com/kzero-xyz/kzero-service-docker)
