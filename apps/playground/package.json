@@ -1,0 +1,59 @@
+{
+  "author": "kzero",
+  "bugs": "https://github.com/kzero-xyz/kzero-wallet/issues",
+  "contributors": [],
+  "description": "kzero theme and UI customization playground",
+  "homepage": "https://github.com/kzero-xyz/kzero-wallet/tree/master/apps/playground#readme",
+  "license": "GPL-3.0",
+  "maintainers": [],
+  "name": "@kzero/playground",
+  "private": true,
+  "publishConfig": {
+    "directory": "build"
+  },
+  "repository": {
+    "directory": "apps/playground",
+    "type": "git",
+    "url": "https://github.com/kzero-xyz/kzero-wallet.git"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --port=5175",
+    "check-types": "tsc -b --noEmit",
+    "build": "tsc -b && vite build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@kzero/message-port": "workspace:*",
+    "@kzero/zk-core": "workspace:*",
+    "@kzero/zk-react": "workspace:*",
+    "@mui/lab": "6.0.0-beta.27",
+    "@mui/material": "^6.4.4",
+    "@polkadot/api": "^16.5.2",
+    "@polkadot/api-augment": "^16.5.2",
+    "@polkadot/ui-keyring": "^3.16.2",
+    "@polkadot/util": "^13.5.8",
+    "@polkadot/util-crypto": "^13.5.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-toastify": "^11.0.2",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@polkadot/extension-inject": "^0.62.3",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "autoprefixer": "^10.4.22",
+    "tailwindcss": "^4.1.17",
+    "vite": "^7.2.2",
+    "vite-plugin-node-polyfills": "^0.24.0",
+    "vite-plugin-svgr": "^4.3.0"
+  }
+}

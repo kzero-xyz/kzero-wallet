@@ -1,0 +1,10 @@
+{
+  "extends": "@kzero/dev/tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/__tests__/**/*", "src/**/*.test.ts", "src/**/*.test.tsx"]
+}

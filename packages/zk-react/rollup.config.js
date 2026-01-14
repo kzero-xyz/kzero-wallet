@@ -25,10 +25,21 @@ export default {
     'react-dom',
     'react/jsx-runtime',
     '@kzero/zk-core',
+    '@kzero/message-port',
     '@polkadot/util-crypto',
     'input-otp'
   ],
   plugins: [
+    typescript({
+      tsconfig: './tsconfig.app.json',
+      declaration: true,
+      declarationDir: 'dist',
+      rootDir: 'src',
+      compilerOptions: {
+        target: 'ES2020',
+        module: 'NodeNext'
+      }
+    }),
     nodeResolve({
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
@@ -41,12 +52,6 @@ export default {
       limit: 10 * 1024, // 10KB
       include: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.webp'],
       emitFiles: true
-    }),
-    typescript({
-      tsconfig: './tsconfig.json',
-      declaration: true,
-      declarationDir: 'dist',
-      rootDir: 'src'
     })
   ]
 };

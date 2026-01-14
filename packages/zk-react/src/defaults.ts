@@ -1,67 +1,59 @@
 // Copyright 2023-2024 kzero authors & contributors
 // SPDX-License-Identifier: GPL-3.0
 
-import type { LoginProvider } from '@kzero/zk-core';
-import type { BaseWalletTheme, WalletTheme } from './types.js';
+import type { ThemeConfig } from '@kzero/zk-core';
 
-const baseTheme: BaseWalletTheme = {
-  radius: {
-    card: '20px',
-    button: '10px'
-  }
-};
+// Re-export ThemeConfig from zk-core for consistency
+export type { ThemeConfig } from '@kzero/zk-core';
 
-export const lightTheme: WalletTheme = {
-  ...baseTheme,
+/**
+ * Default light theme configuration
+ */
+export const lightTheme: ThemeConfig = {
   colors: {
     background: '#FFFFFF',
-    text: '#000000',
-    primaryColor: '#5328E7',
-    primaryContrastColor: '#FFFFFF',
-    secondaryColor: 'rgba(83, 40, 231, 0.1)',
-    secondaryContrastColor: '#5328E7',
-    successColor: '#00C414',
-    successContrastColor: '#FFFFFF',
-    errorColor: '#FF5310',
-    errorContrastColor: '#FFFFFF',
-    warningColor: '#F09337',
-    warningContrastColor: '#FFFFFF',
-    borderColor: '#D9D9D9',
-    dividerColor: 'rgba(0, 0, 0, 0.1)'
+    foreground: '#000000',
+    primary: '#5328E7',
+    primaryForeground: '#FFFFFF',
+    secondary: 'rgba(83, 40, 231, 0.1)',
+    secondaryForeground: '#5328E7',
+    success: '#00C414',
+    successForeground: '#FFFFFF',
+    error: '#FF5310',
+    errorForeground: '#FFFFFF',
+    warning: '#F09337',
+    warningForeground: '#FFFFFF',
+    border: '#D9D9D9',
+    divider: 'rgba(217, 217, 217, 0.5)'
   },
-  button: {
-    disabledBackgroundColor: '#D9D9D9',
-    disabledTextColor: '#FFFFFF'
+  radius: {
+    base: '10px',
+    card: '20px'
   }
 };
 
-export const darkTheme: WalletTheme = {
-  ...baseTheme,
+/**
+ * Default dark theme configuration
+ */
+export const darkTheme: ThemeConfig = {
   colors: {
     background: '#000000',
-    text: '#FFFFFF',
-    primaryColor: '#5328E7',
-    primaryContrastColor: '#FFFFFF',
-    secondaryColor: 'rgba(83, 40, 231, 0.1)',
-    secondaryContrastColor: '#5328E7',
-    successColor: '#00FF00',
-    successContrastColor: '#FFFFFF',
-    errorColor: '#FF5310',
-    errorContrastColor: '#FFFFFF',
-    warningColor: '#F09337',
-    warningContrastColor: '#FFFFFF',
-    borderColor: '#5b5b5b',
-    dividerColor: 'rgba(255, 255, 255, 0.1)'
+    foreground: '#FFFFFF',
+    primary: '#5328E7',
+    primaryForeground: '#FFFFFF',
+    secondary: 'rgba(83, 40, 231, 0.1)',
+    secondaryForeground: '#5328E7',
+    success: '#00C414',
+    successForeground: '#FFFFFF',
+    error: '#FF5310',
+    errorForeground: '#FFFFFF',
+    warning: '#F09337',
+    warningForeground: '#FFFFFF',
+    border: '#5b5b5b',
+    divider: 'rgba(91, 91, 91, 0.5)'
   },
-  button: {
-    disabledBackgroundColor: '#D9D9D9',
-    disabledTextColor: '#FFFFFF'
+  radius: {
+    base: '10px',
+    card: '20px'
   }
 };
-
-export const defaultTheme = lightTheme;
-
-export const defaultProviders: LoginProvider[] = ['google', 'twitter'];
-
-// export const walletIframeUrl = 'https://demo-wallet.kzero.xyz';
-export const walletIframeUrl = 'http://localhost:5176';

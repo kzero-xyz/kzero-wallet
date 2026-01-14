@@ -1,9 +1,7 @@
 {
-  "extends": "@kzero/dev/tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src"
-  },
-  "include": ["src", "module.d.ts"],
-  "exclude": ["dist", "node_modules"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.test.json" }
+  ]
 }

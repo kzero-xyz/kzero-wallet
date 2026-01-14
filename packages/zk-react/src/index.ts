@@ -1,10 +1,25 @@
 // Copyright 2023-2024 kzero authors & contributors
 // SPDX-License-Identifier: GPL-3.0
 
-export { default as WalletCard } from './card/index.js';
-export { default as WalletProvider } from './WalletProvider.js';
-export { useAccounts } from './useAccounts.js';
-export { useLogout } from './useLogout.js';
-export * from './components/index.js';
+// Provider
+export { KzeroProvider } from './providers/KzeroProvider.js';
 
-export type * from './types.js';
+// Hooks
+export { useKzero } from './hooks/useKzero.js';
+export type { UseKzeroReturn } from './hooks/useKzero.js';
+
+// Components (minimal - only wallet-specific)
+export { default as WalletCard } from './components/WalletCard.js';
+
+// Theme & Configuration
+export { darkTheme, lightTheme } from './defaults.js';
+export type { ThemeConfig } from './defaults.js';
+
+// Types - re-export from @kzero/zk-core
+export type { LoginProvider, ZkAccount } from '@kzero/zk-core';
+
+// Types - SDK specific
+export type { KzeroProviderProps, DisplayMode, TransactionRequest, TransactionResponse } from './types/index.js';
+
+// Errors
+export { ConnectionError, KzeroError, NotSupportedError, TransactionError } from './utils/errors.js';

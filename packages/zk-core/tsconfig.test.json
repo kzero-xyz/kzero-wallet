@@ -1,0 +1,11 @@
+{
+  "extends": "@kzero/dev/tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    "outDir": "./dist-test",
+    "rootDir": "src",
+    "types": ["vitest/globals", "node"]
+  },
+  "include": ["src/**/__tests__/**/*", "src/**/*.test.ts", "src/**/*.test.tsx"],
+  "exclude": ["node_modules", "dist", "dist-test"]
+}

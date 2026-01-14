@@ -1,0 +1,54 @@
+{
+  "author": "kzero",
+  "bugs": "https://github.com/kzero-xyz/kzero-wallet/issues",
+  "contributors": [],
+  "description": "Type-safe PostMessage communication for iframe-based applications",
+  "homepage": "https://github.com/kzero-xyz/kzero-wallet/tree/master/packages/message-port#readme",
+  "license": "GPL-3.0",
+  "maintainers": [],
+  "name": "@kzero/message-port",
+  "repository": {
+    "directory": "packages/message-port",
+    "type": "git",
+    "url": "https://github.com/kzero-xyz/kzero-wallet.git"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "version": "0.0.0",
+  "main": "index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "postmessage",
+    "iframe",
+    "communication",
+    "typescript",
+    "promise",
+    "type-safe"
+  ],
+  "exports": {
+    ".": {
+      "@kzero/source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.app.json",
+    "check-types": "tsc -b --noEmit",
+    "dev": "tsc -p tsconfig.app.json --watch",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
+    "test:cov": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@kzero/zk-core": "workspace:^"
+  },
+  "devDependencies": {
+    "@kzero/dev": "workspace:^"
+  }
+}

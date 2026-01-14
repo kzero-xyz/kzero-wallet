@@ -5,6 +5,33 @@ export type Hex = `0x${string}`;
 
 export type LoginProvider = 'google' | 'twitter' | 'apple' | 'github' | 'telegram' | 'discord';
 
+/**
+ * Theme configuration for wallet UI customization
+ * Maps to CSS custom properties in wallet app
+ */
+export interface ThemeConfig {
+  colors: {
+    background: string;
+    foreground: string;
+    primary: string;
+    primaryForeground: string;
+    secondary: string;
+    secondaryForeground: string;
+    success: string;
+    successForeground: string;
+    error: string;
+    errorForeground: string;
+    warning: string;
+    warningForeground: string;
+    border: string;
+    divider: string;
+  };
+  radius: {
+    base: string;
+    card: string;
+  };
+}
+
 export type ZkAccount = {
   type: 'zk';
   address: Hex;
@@ -13,7 +40,6 @@ export type ZkAccount = {
   name: string;
   email?: string;
   picture?: string;
-  status: 'pending' | 'encrypting' | 'ready';
   proofStatus: 'pending' | 'error' | 'generated';
 };
 
@@ -38,19 +64,19 @@ export interface SignerPayloadJSON {
   /**
    * @description The checkpoint hash of the block, in hex
    */
-  blockHash: Hex;
+  blockHash?: Hex;
   /**
    * @description The checkpoint block number, in hex
    */
-  blockNumber: Hex;
+  blockNumber?: Hex;
   /**
    * @description The era for this transaction, in hex
    */
-  era: Hex;
+  era?: Hex;
   /**
    * @description The genesis hash of the chain, in hex
    */
-  genesisHash: Hex;
+  genesisHash?: Hex;
   /**
    * @description The metadataHash for the CheckMetadataHash SignedExtension, as hex
    */
@@ -66,27 +92,27 @@ export interface SignerPayloadJSON {
   /**
    * @description The nonce for this transaction, in hex
    */
-  nonce: Hex;
+  nonce?: Hex;
   /**
    * @description The current spec version for the runtime
    */
-  specVersion: Hex;
+  specVersion?: Hex;
   /**
    * @description The tip for this transaction, in hex
    */
-  tip: Hex;
+  tip?: Hex;
   /**
    * @description The current transaction version for the runtime
    */
-  transactionVersion: Hex;
+  transactionVersion?: Hex;
   /**
    * @description The applicable signed extensions for this runtime
    */
-  signedExtensions: string[];
+  signedExtensions?: string[];
   /**
    * @description The version of the extrinsic we are dealing with
    */
-  version: number;
+  version?: number;
   /**
    * @description Optional flag that enables the use of the `signedTransaction` field in
    * `singAndSend`, `signAsync`, and `dryRun`.
@@ -113,7 +139,7 @@ export interface SignerResult {
    *
    * NOTE: This is only implemented for `signPayload`, and will only work when the `withSignedTransaction` option is enabled as an option.
    */
-  signedTransaction?: Hex;
+  signedTransaction: Hex;
 }
 
 export interface MetadataDefBase {
@@ -133,62 +159,66 @@ export interface MetadataDef extends MetadataDefBase {
   userExtensions?: Record<string, any>;
 }
 
-type ErrorOrResponse<T> = { error?: never; response: T } | { error: string; response?: never };
-
-export type MessageData = { id: string; error?: unknown } & (
-  | ({
-      type: 'wallet.ready';
-      payload: null | undefined;
-    } & ErrorOrResponse<null>)
-  | ({
-      type: 'theme.set';
-      payload: any;
-    } & ErrorOrResponse<null>)
-  | ({
-      type: 'isLocked';
-      payload: null | undefined;
-    } & ErrorOrResponse<{ isLocked: boolean }>)
-  | ({
-      type: 'unlock';
-      payload: { passphrase: string };
-    } & ErrorOrResponse<null>)
-  | ({
-      type: 'transaction.sign';
-      payload: { data: Hex };
-    } & ErrorOrResponse<{ signature: Hex; signedTransaction: Hex }>)
-  | ({
-      type: 'logout';
-      payload: null | undefined;
-    } & ErrorOrResponse<null>)
-  | ({
-      type: 'accounts.all';
-      payload: null | undefined;
-    } & ErrorOrResponse<{ accounts: ZkAccount[] }>)
-  | ({
-      type: 'accounts.retrieve';
-      payload: { ephemeralPublicKey: Hex };
-    } & ErrorOrResponse<{ account: ZkAccount }>)
-  | ({
-      type: 'proof.get';
-      payload: { ephemeralPublicKey: Hex };
-    } & ErrorOrResponse<{ proof: Proof | null }>)
-  | ({
-      type: 'ephemeral-key.generate';
-      payload: null | undefined;
-    } & ErrorOrResponse<{ publicKey: Hex }>)
-  | ({
-      type: 'ephemeral-key.encrypt';
-      payload: { passphrase?: string; ephemeralPublicKey: Hex };
-    } & ErrorOrResponse<null>)
-  | ({
-      type: 'metadata.list';
-      payload: null | undefined;
-    } & ErrorOrResponse<Array<{ genesisHash: string; specVersion: number }>>)
-  | ({
-      type: 'metadata.provide';
-      payload: MetadataDef;
-    } & ErrorOrResponse<boolean>)
-);
+/**
+ * Message types for parent-wallet communication
+ * Using discriminated unions for type-safe message handling
+ */
+export type MessageData = { id: string; error?: string } &
+  // Account management
+  (| {
+        type: 'accounts.all';
+        payload: null | undefined;
+        response: { accounts: ZkAccount[] };
+      }
+    | {
+        type: 'logout';
+        payload: null | undefined;
+        response: null;
+      }
+    // Transaction signing
+    | {
+        type: 'sign.request';
+        payload: SignerPayloadJSON;
+        response: SignerResult;
+      }
+    | {
+        type: 'sign.cancelled';
+        payload: null | undefined;
+        response: null;
+      }
+    // Events (emit/listen only, no request/response)
+    | {
+        type: 'accounts.change';
+        payload: ZkAccount | null;
+        response: null;
+      }
+    | {
+        type: 'auth.request';
+        payload: {
+          provider: LoginProvider;
+          authUrl: string;
+          sessionId: string;
+        };
+        response: null;
+      }
+    | {
+        type: 'auth.window-closed';
+        payload: null | undefined;
+        response: null;
+      }
+    // Theme management
+    | {
+        type: 'theme.update';
+        payload: ThemeConfig;
+        response: null;
+      }
+    // Providers management
+    | {
+        type: 'providers.update';
+        payload: LoginProvider[];
+        response: null;
+      }
+  );
 
 export type RequestMessage = Omit<MessageData, 'response'>;
 
